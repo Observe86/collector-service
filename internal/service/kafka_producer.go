@@ -1,6 +1,9 @@
-package grpc
+package service
 
 import (
+	"context"
+	"os"
+
 	"github.com/segmentio/kafka-go"
 )
 
@@ -20,15 +23,28 @@ func (k *KafkaProducer) SendMessage(topic string, value []byte) error {
 	})
 	defer writer.Close()
 
-	return writer.WriteMessages(nil, kafka.Message{Value: value})
+	ctx := context.Background()
+	return writer.WriteMessages(ctx, kafka.Message{Value: value})
 }
 
 func (k *KafkaProducer) SendMetrics(data []byte) error {
-	return k.SendMessage("metrics", data)
+	topic := os.Getenv("KAFKA_METRICS_TOPIC")
+	if topic == "" {
+		topic = "metrics"
+	}
+	return k.SendMessage(topic, data)
 }
 func (k *KafkaProducer) SendLogs(data []byte) error {
-	return k.SendMessage("logs", data)
+	topic := os.Getenv("KAFKA_LOGS_TOPIC")
+	if topic == "" {
+		topic = "logs"
+	}
+	return k.SendMessage(topic, data)
 }
 func (k *KafkaProducer) SendTraces(data []byte) error {
-	return k.SendMessage("traces", data)
+	topic := os.Getenv("KAFKA_TRACES_TOPIC")
+	if topic == "" {
+		topic = "traces"
+	}
+	return k.SendMessage(topic, data)
 }
