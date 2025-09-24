@@ -1,6 +1,6 @@
 # Collector Service
 
-Routes telemetry downstream to Kafka
+Routes telemetry downstream to Kafka.
 
 ## Build and Run
 
