@@ -36,7 +36,7 @@ func main() {
 	grpcServer := grpcPkg.NewServer()
 	gen.RegisterCollectorServiceServer(grpcServer, server)
 
-	log.Printf("Collector-Gateway listening on %s, sending to Kafka %s", port, kafkaBrokers)
+	log.Printf("Collector-Service listening on %s, sending to Kafka %s", port, kafkaBrokers)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
