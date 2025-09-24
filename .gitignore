@@ -1,0 +1,32 @@
+# Binaries
+collector-service
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output directories
+/bin/
+/build/
+/out/
+
+# Go modules
+/go.sum
+
+# Vendor directory
+/vendor/
+
+# IDE/editor files
+*.idea/
+*.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local
